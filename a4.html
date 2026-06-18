@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アルファ・ラバル湘南センター 納涼祭 2026 チラシ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Zen+Antique&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-1:#10162E;
+    --night-2:#1B2547;
+    --dusk:#3C3A66;
+    --royal-1:#2C2D82;
+    --royal-2:#191A54;
+    --lantern:#F4A53D;
+    --lantern-deep:#DC832A;
+    --vermilion:#C44430;
+    --washi:#F4EBD8;
+    --washi-2:#FBF5E8;
+    --ink:#241B14;
+    --ink-soft:#6A5C4D;
+    --line:#E2D5BC;
+    --gold:#BE923B;
+    --kin:#CBA85C;
+    --kin-2:#E6CE92;
+    --serif:'Zen Antique', serif;
+    --brush:'Yuji Syuku', serif;
+    --gothic:'Zen Kaku Gothic New', sans-serif;
+  }
+
+  /* 印刷プレビュー・ブラウザ表示用のリセット */
+  * { 
+    box-sizing: border-box; 
+    -webkit-print-color-adjust: exact; /* 印刷時に背景を強制出力 */
+    print-color-adjust: exact;
+  }
+  
+  body {
+    margin: 0; 
+    font-family: var(--gothic); 
+    background: #555; /* 画面上での背景 */
+    color: var(--ink);
+    line-height: 1.6; 
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0;
+  }
+
+  /* A4ページの定義 */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--washi);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 印刷用の設定 */
+  @page {
+    size: A4 portrait;
+    margin: 0; /* フチなし印刷想定 */
+  }
+  @media print {
+    body { background: none; padding: 0; gap: 0; display: block; }
+    .page { box-shadow: none; margin: 0; page-break-after: always; }
+    /* 印刷時はアニメーションを止めて固定配置 */
+    .koi, .koi__wake .r, .lantern, .furin { animation: none !important; }
+    .koi__face { animation: none !important; }
+    .koi--swimR { left: 15% !important; }
+    .koi--swimL { left: 65% !important; }
+    .print-hide { display: none; }
+  }
+
+  /* ====== 装飾モジュール（LP流用） ====== */
+  .koi{position:absolute; color:var(--kin); pointer-events:none; z-index: 10;}
+  .koi svg{display:block; width:100%; height:auto; filter:drop-shadow(0 3px 6px rgba(0,0,0,.22));}
+  .koi__face{display:block; animation: strokeL 4.3s ease-in-out infinite;}
+  .koi__face--r{animation: strokeR 4.7s ease-in-out infinite;}
+  .koi__bob{display:block; animation:bob 5s ease-in-out infinite;}
+  @keyframes bob{ 0%,100%{transform:translateY(0) rotate(-1.5deg);} 50%{transform:translateY(-6px) rotate(1.6deg);} }
+  @keyframes strokeL { 0%, 100% { transform: translateX(0); } 15% { transform: translateX(-16px); } 60% { transform: translateX(6px); }  }
+  @keyframes strokeR { 0%, 100% { transform: scaleX(-1) translateX(0); } 15% { transform: scaleX(-1) translateX(-16px); } 60% { transform: scaleX(-1) translateX(6px); } }
+  .koi--swimR{animation:acrossR calc(var(--dur,22s) * 1.5) linear infinite var(--delay,0s);}
+  .koi--swimL{animation:acrossL calc(var(--dur,22s) * 1.5) linear infinite var(--delay,0s);}
+  @keyframes acrossR{ from{left:-18%;} to{left:112%;} }
+  @keyframes acrossL{ from{left:112%;} to{left:-18%;} }
+  .koi__wake{position:absolute; top:50%; width:100%; pointer-events:none; z-index:-1;}
+  .koi--swimL .koi__wake{left: 50%; transform:translateY(-50%);}
+  .koi--swimR .koi__wake{right: 50%; transform:translateY(-50%) scaleX(-1);}
+  .koi__wake svg{display:block; width:100%; height:auto; filter:none; overflow:visible;}
+  .koi__wake .r{transform-box:fill-box; transform-origin:center; opacity:0; animation:wake 4.2s ease-out infinite;}
+  .koi__wake .r2{ animation-delay:1.4s; } .koi__wake .r3{ animation-delay:2.8s; }
+  @keyframes wake{ 0% { opacity:0; transform:scale(.3) translateX(0); } 18% { opacity:.35; } 100% { opacity:0; transform:scale(2.8) translateX(30px); } }
+
+  .lanterns{ position:absolute; top:0; left:0; right:0; height:80px; display:flex; justify-content:space-around; align-items:flex-start; padding:0 4%; border-top:2px solid rgba(252,238,218,.25); pointer-events:none; z-index:2; }
+  .lantern{ position:relative; width:24px; height:32px; margin-top:var(--drop,10px); border-radius:50%/46%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.10) 0 1px, transparent 1px 6px), radial-gradient(circle at 50% 38%, #FFD27A 0%, var(--lantern) 45%, var(--lantern-deep) 100%);
+    box-shadow:0 0 14px rgba(244,165,61,.65), inset 0 -3px 6px rgba(0,0,0,.15); transform-origin:top center; animation:sway 5.5s ease-in-out infinite; }
+  .lantern::before{ content:""; position:absolute; top:-3px; left:50%; transform:translateX(-50%); width:10px; height:4px; background:#2A2233; border-radius:2px; }
+  .lantern::after{ content:""; position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); width:3px; height:7px; background:var(--vermilion); border-radius:2px; }
+  .lantern:nth-child(2n){--drop:20px; animation-duration:6.5s;} .lantern:nth-child(3n){--drop:6px; animation-duration:5s;} .lantern:nth-child(4n){--drop:16px;}
+  @keyframes sway{ 0%,100%{transform:rotate(-3.5deg);} 50%{transform:rotate(3.5deg);} }
+
+  /* ====== 1枚目（表面）スタイル ====== */
+  .hero-p1 {
+    height: 38%;
+    position: relative;
+    background: radial-gradient(120% 70% at 50% 118%, rgba(224,116,58,.45) 0%, rgba(224,116,58,0) 55%), linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 52%, var(--dusk) 100%);
+    color: #FCEEDA;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .hero-p1::before {
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image: radial-gradient(1.4px 1.4px at 12% 18%, rgba(255,255,255,.7), transparent), radial-gradient(1.2px 1.2px at 78% 12%, rgba(255,255,255,.6), transparent), radial-gradient(1.5px 1.5px at 33% 28%, rgba(255,255,255,.5), transparent), radial-gradient(1.2px 1.2px at 62% 22%, rgba(255,255,255,.55), transparent);
+  }
+  .hero__eyebrow { font-family:var(--serif); letter-spacing:.3em; font-size:1rem; color:#F4C98A; margin:0 0 1rem; }
+  .hero__title { font-family:var(--brush); font-size:4.8rem; line-height:1; margin:0; letter-spacing:.08em; text-shadow:0 0 30px rgba(244,165,61,.4); position: relative; z-index: 3;}
+  .hero__year { font-family:var(--serif); font-size:1.4rem; letter-spacing:.6em; margin:1rem 0 1.5rem; padding-left:.6em; color:#FCEEDA; }
+  .hero__year::before,.hero__year::after { content:"—"; color:var(--lantern); margin:0 .5em; opacity:.7; }
+  .hero__tagline { font-family:var(--serif); font-size:1.2rem; margin:0 0 .4rem; color:#FFE6C4; position: relative; z-index: 3;}
+  .hero__venue { font-size:0.95rem; color:#D8C7B0; margin:0; letter-spacing:.04em; }
+
+  .noren-p1 {
+    background: var(--vermilion);
+    color: #FCEEDA;
+    text-align: center;
+    padding: 1.6rem 2rem;
+    position: relative;
+    z-index: 5;
+  }
+  .noren-p1::after {
+    content:""; position:absolute; left:0; right:0; bottom:-12px; height:12px;
+    background:repeating-linear-gradient(90deg, var(--vermilion) 0 14px, transparent 14px 28px);
+    -webkit-mask:repeating-linear-gradient(90deg, #000 0 14px, transparent 14px 28px);
+  }
+  .noren__label { font-family:var(--serif); letter-spacing:.4em; font-size:0.8rem; opacity:.85; margin:0 0 .4rem; padding-left:.4em; }
+  .noren__main { font-family:var(--brush); font-size:2.8rem; margin:0; line-height:1.1; letter-spacing:.1em; }
+  .noren__sub { font-size:0.9rem; margin:.6rem auto 0; color:#FBE2CF; max-width: 90%; }
+
+  .body-p1 {
+    flex: 1;
+    padding: 2.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 2rem;
+    align-items: stretch;
+  }
+  
+  /* タイムライン */
+  .timeline { list-style:none; margin:0; padding:0; position:relative; }
+  .timeline::before { content:""; position:absolute; top:6px; bottom:6px; left:52px; width:2px; background:linear-gradient(var(--lantern), var(--lantern-deep)); }
+  .tl-item { position:relative; display:grid; grid-template-columns:46px 1fr; gap:1.2rem; padding-bottom:1.3rem; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-time { font-family:var(--serif); font-size:1.05rem; color:var(--vermilion); text-align:right; padding-top:.1rem; letter-spacing:.02em; white-space:nowrap; }
+  .tl-node { position:relative; }
+  .tl-node::before { content:""; position:absolute; left:-9px; top:5px; width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #FFD27A, var(--lantern)); box-shadow:0 0 0 3px var(--washi-2), 0 0 10px rgba(244,165,61,.7); }
+  .tl-card { background:var(--washi); border:1px solid var(--line); border-radius:8px; padding:0.8rem 1rem; margin-left:0.5rem; }
+  .tl-card h3 { font-family:var(--serif); margin:0; font-size:1.05rem; letter-spacing:.03em; }
+  .tl-card p { margin:.3rem 0 0; font-size:0.8rem; color:var(--ink-soft); line-height:1.6; }
+  
+  /* インフォボックス */
+  .info-column { display: flex; flex-direction: column; gap: 1.5rem; justify-content: flex-start; }
+  .notice-box { background: var(--washi-2); border: 1px solid var(--line); border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(36,27,20,.05); position: relative; overflow: hidden;}
+  .notice-box::before { content:""; position: absolute; top:0; left:0; width:6px; height:100%; background: var(--vermilion); }
+  .notice-box.bus::before { background: var(--dusk); }
+  
+  .notice-box h3 { font-family:var(--serif); color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:0.6rem; margin:0 0 1rem; font-size: 1.15rem;}
+  .notice-box p { margin:0 0 0.5rem; font-size:0.85rem; line-height:1.6; }
+  
+  .bus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; background: #fff; padding: 1rem; border-radius: 6px; border: 1px solid var(--line); text-align: center;}
+  .bus-route { font-weight: bold; color: var(--dusk); font-size: 0.9rem; margin-bottom: 0.2rem;}
+  .bus-time { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); margin: 0;}
+  
+  .qr-wrap { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; background: #fff; padding: 0.8rem; border-radius: 6px; border: 1px solid var(--line); }
+  .qr-code { width: 72px; height: 72px; border: 2px dashed var(--vermilion); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--vermilion); font-weight: bold; background: #fafafa; flex: none; }
+  .qr-text { font-size: 0.8rem; color: var(--vermilion); font-weight: bold; line-height: 1.4; }
+
+
+  /* ====== 2枚目（裏面）スタイル ====== */
+  .header-p2 { text-align: center; padding: 2rem 2rem 1.5rem; }
+  .header-p2 .eyebrow { font-family:var(--serif); letter-spacing:.3em; font-size:0.9rem; color:var(--gold); margin:0 0 .4rem; text-transform:uppercase; }
+  .header-p2 h2 { font-family:var(--serif); font-size:1.8rem; color:var(--ink); margin:0 0 0.5rem; letter-spacing:.06em; }
+  .header-p2 p { margin:0; font-size:0.9rem; color:var(--ink-soft); }
+
+  .stalls-grid {
+    padding: 0 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .stall { background:var(--washi); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .stall__photo { position:relative; height:100px; display:flex; align-items:center; justify-content:center; color:#FCEEDA; }
+  .stall:nth-child(4n+1) .stall__photo{background:linear-gradient(135deg,var(--lantern-deep),var(--lantern));}
+  .stall:nth-child(4n+2) .stall__photo{background:linear-gradient(135deg,#9F3322,var(--vermilion));}
+  .stall:nth-child(4n+3) .stall__photo{background:linear-gradient(135deg,var(--night-2),var(--dusk));}
+  .stall:nth-child(4n+4) .stall__photo{background:linear-gradient(135deg,#A4791F,var(--gold));}
+  .stall__photo::after { content:"PHOTO"; position:absolute; top:.4rem; right:.5rem; font-family:var(--serif); font-size:.5rem; letter-spacing:.2em; opacity:.6; padding-left:.2em; border: 1px solid rgba(255,255,255,0.4); padding: 2px 6px; border-radius: 4px;}
+  .stall__cat { font-family:var(--brush); font-size:1.6rem; letter-spacing:.12em; text-shadow:0 2px 6px rgba(0,0,0,.2); }
+  
+  .stall__body { padding:0.8rem; }
+  .stall__name { display:flex; align-items:flex-start; justify-content:space-between; gap:0.4rem; margin:0 0 0.5rem; font-family:var(--serif); font-size:1rem; color:var(--ink); letter-spacing:.02em; line-height: 1.2; }
+  .stall__name span:first-child { flex: 1; }
+  .tag { flex:none; font-size:0.6rem; letter-spacing:.04em; color:var(--vermilion); border:1px solid var(--vermilion); border-radius:3px; padding:.15rem .4rem; line-height:1; font-family:var(--gothic); font-weight: bold;}
+  .stall__desc { margin:0; font-size:0.75rem; color:var(--ink-soft); line-height:1.6; }
+  .stall__desc b { color:var(--vermilion); }
+
+  .ennichi-p2 {
+    margin: 0.5rem 2rem 2rem;
+    border-radius: 16px;
+    background: linear-gradient(165deg, var(--royal-1) 0%, #20216A 50%, var(--royal-2) 100%);
+    box-shadow: inset 0 0 40px rgba(0,0,0,.3);
+    position: relative;
+    overflow: hidden;
+    flex: 1; /* 残りの高さを埋める */
+    display: flex;
+    align-items: center;
+  }
+  .water__caption {
+    position: relative; z-index: 3; width: 100%; padding: 2rem; color: #EDE6D2;
+    background: linear-gradient(90deg, rgba(15,16,55,0.85) 0%, rgba(15,16,55,0.4) 60%, transparent 100%);
+    height: 100%; display: flex; flex-direction: column; justify-content: center;
+  }
+  .water__caption .lead { font-family:var(--serif); font-size:1rem; letter-spacing:.06em; margin:0 0 .2rem; color:var(--kin-2); }
+  .water__caption h3 { font-family:var(--serif); font-size: 1.8rem; margin:0 0 0.6rem; color: #fff; letter-spacing: .08em;}
+  .water__caption p { margin:0; font-size:0.9rem; color:#D8D2E6; max-width: 65%; line-height: 1.7;}
+  
+  /* 操作ガイダンス（印刷時は非表示） */
+  .guide-panel {
+    background: #fff; padding: 16px 24px; border-radius: 8px; border-left: 4px solid var(--vermilion); box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 210mm;
+  }
+  .guide-panel h4 { margin: 0 0 8px; color: var(--night-1); font-family: var(--serif);}
+  .guide-panel p { margin: 0 0 4px; font-size: 0.9rem; color: #555;}
+</style>
+</head>
+<body>
+
+  <!-- 印刷用ガイダンス（画面上のみ表示） -->
+  <div class="guide-panel print-hide">
+    <h4>🖨️ A4チラシ 印刷用プレビュー</h4>
+    <p>この画面から直接印刷（Ctrl+P / Cmd+P）することで、A4サイズのチラシとして出力可能です。</p>
+    <p>※印刷設定で「用紙サイズ: A4」「余白: なし」「背景のグラフィックを印刷する: オン」に設定してください。</p>
+  </div>
+
+  <!-- ===============================
+       1枚目：表面
+       =============================== -->
+  <div class="page page-1">
+    
+    <div class="hero-p1">
+      <div class="lanterns" aria-hidden="true">
+        <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+        <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+        <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+      </div>
+      
+      <div class="koi koi--swimR" style="top:25%; left:15%; width:110px; opacity:.7; --dur:26s; --delay:-4s;" aria-hidden="true">
+        <div class="koi__face koi__face--r"><div class="koi__bob">
+          <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/><path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/><path d="M36 52 C38 67 53 67 51 52 Z"/><path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/><path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/></g><circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/></svg>
+        </div></div>
+        <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2"><ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/></svg></div>
+      </div>
+
+      <p class="hero__eyebrow">アルファ・ラバル湘南センター</p>
+      <h1 class="hero__title">納涼祭</h1>
+      <p class="hero__year">2026</p>
+      <p class="hero__tagline">夕涼みに、ひと夏の縁日を。</p>
+      <p class="hero__venue">食べて、遊んで、家族みんなで最高の一日。</p>
+    </div>
+
+    <div class="body-p1">
+      <!-- 左：タイムスケジュール -->
+      <div>
+        <h3 style="font-family:var(--serif); font-size:1.4rem; margin:0 0 1.2rem; color:var(--ink); letter-spacing:.04em;">当日のながれ</h3>
+        <ul class="timeline">
+          <li class="tl-item">
+            <div class="tl-time">15:50</div>
+            <div class="tl-node"><div class="tl-card"><h3>工場見学</h3><p>普段は見られない裏側を大公開。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">16:20</div>
+            <div class="tl-node"><div class="tl-card"><h3>オフィスツアー</h3><p>働く環境をご家族にも。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">16:30</div>
+            <div class="tl-node"><div class="tl-card"><h3>開会セレモニー</h3><p>納涼祭、いよいよスタート！</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">17:30</div>
+            <div class="tl-node"><div class="tl-card"><h3>チーム対抗戦</h3><p>部署や家族の垣根を超えて盛り上がるゲーム大会！</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">18:40</div>
+            <div class="tl-node"><div class="tl-card"><h3>大抽選会</h3><p>豪華景品が当たるチャンス。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">19:00</div>
+            <div class="tl-node"><div class="tl-card"><h3>閉会セレモニー</h3><p>お気をつけてお帰りください。</p></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右：インフォメーション -->
+      <div class="info-column">
+        
+        <div class="notice-box bus">
+          <h3>🚌 無料送迎バスのご案内</h3>
+          <p>会場までの往復に、無料の送迎バスをご用意しております。ぜひご利用ください。</p>
+          <div class="bus-grid">
+            <div>
+              <div class="bus-route">【行き】 〇〇駅発</div>
+              <div class="bus-time">15:10 / 15:40</div>
+            </div>
+            <div>
+              <div class="bus-route">【帰り】 湘南センター発</div>
+              <div class="bus-time">19:20 / 19:40</div>
+            </div>
+          </div>
+          <p style="font-size:0.7rem; color:var(--ink-soft); margin-top:0.6rem; text-align:right;">※乗り場の詳細は特設サイトをご確認ください。</p>
+        </div>
+
+        <div class="notice-box">
+          <h3>📱 事前登録のお願い</h3>
+          <p>食材や景品の適切な準備のため、ご参加される皆様の<strong>事前登録</strong>をお願いいたします。</p>
+          <p style="color:var(--vermilion); font-weight:bold; font-size:0.8rem;">※ご家族・同伴者のご登録も可能です。</p>
+          
+          <div class="qr-wrap">
+            <div class="qr-code">QR<br>CODE</div>
+            <div class="qr-text">◀ 左のQRコードを<br>スキャンして<br>登録フォームへ</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===============================
+       2枚目：裏面
+       =============================== -->
+  <div class="page page-2">
+    
+    <div class="header-p2">
+      <p class="eyebrow">Food &amp; Drink — All Free</p>
+      <h2>出店のご案内（全9店舗・すべて無料！）</h2>
+      <p>全品無料の納涼祭！！ご家族みんなでお腹いっぱいお召し上がりください</p>
+    </div>
+
+    <div class="stalls-grid">
+      <!-- 1 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">むすび</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>MUSUBI</span> <span class="tag">おにぎり</span></h3>
+          <p class="stall__desc">ふっくら炊き上げたお米に、こだわりの具材を丁寧に包み込んだ優しい味わい。</p>
+        </div>
+      </article>
+      <!-- 2 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">ピザ</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>pizza monte costa</span> <span class="tag">ピザ</span></h3>
+          <p class="stall__desc">昨年大好評！薪窯で焼き上げる熱々の本格ナポリピッツァ。</p>
+        </div>
+      </article>
+      <!-- 3 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">カレー</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>Hi,spice</span> <span class="tag">カレー</span></h3>
+          <p class="stall__desc">2026年初参戦。味噌とスパイスを掛け合わせたオリジナルカレー。</p>
+        </div>
+      </article>
+      <!-- 4 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">焼鳥</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>龍鳳</span> <span class="tag">やきとり</span></h3>
+          <p class="stall__desc">秘伝のたれと、香ばしく焼き上げた本格炭火焼き鳥。</p>
+        </div>
+      </article>
+      <!-- 5 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">アイス</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>Plenty's</span> <span class="tag">アイス</span></h3>
+          <p class="stall__desc">茅ヶ崎発の人気店。濃厚アイスクリーム。<b>※ワッフルは早い者勝ち！</b></p>
+        </div>
+      </article>
+      <!-- 6 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">クレープ</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>AL FRENTE</span> <span class="tag">スイーツ</span></h3>
+          <p class="stall__desc">サクッと香ばしいチュロスやクレープなど人気メニューが勢ぞろい！</p>
+        </div>
+      </article>
+      <!-- 7 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">チキン</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>ROKET CHICKEN</span> <span class="tag">チキン</span></h3>
+          <p class="stall__desc">サクッと軽い食感とジューシーな旨みが自慢のオリジナルフライドチキン。</p>
+        </div>
+      </article>
+      <!-- 8 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">サンド</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>THE NYC BOX</span> <span class="tag">キューバサンド</span></h3>
+          <p class="stall__desc">自家製ローストポークとチーズが織りなすニューヨークスタイル。</p>
+        </div>
+      </article>
+      <!-- 9 -->
+      <article class="stall">
+        <div class="stall__photo"><span class="stall__cat">ケバブ</span></div>
+        <div class="stall__body">
+          <h3 class="stall__name"><span>YOKO FOOD</span> <span class="tag">ケバブ</span></h3>
+          <p class="stall__desc">香ばしく焼いたお肉と新鮮野菜を特製ソースで仕上げたボリューム満点ケバブ。</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="ennichi-p2">
+      <div class="koi koi--swimL" style="top:40%; left:65%; width:90px; opacity:.85; --dur:21s; --delay:-9s;" aria-hidden="true">
+        <div class="koi__face"><div class="koi__bob">
+          <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/><path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/><path d="M36 52 C38 67 53 67 51 52 Z"/><path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/><path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/></g><circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/></svg>
+        </div></div>
+        <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2"><ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/></svg></div>
+      </div>
+      
+      <div class="water__caption">
+        <p class="lead">For Kids</p>
+        <h3>水辺の縁日コーナー</h3>
+        <p>ヨーヨー釣りや駄菓子屋など、昔懐かしいワクワクするイベントがたくさん！<br>お子様連れでも一日中楽しめます。</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
