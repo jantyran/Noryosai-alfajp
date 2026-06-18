@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アルファ・ラバル湘南センター 納涼祭 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Zen+Antique&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --night-1:#10162E;
+    --night-2:#1B2547;
+    --dusk:#3C3A66;
+    --royal-1:#2C2D82;
+    --royal-2:#191A54;
+    --lantern:#F4A53D;
+    --lantern-deep:#DC832A;
+    --vermilion:#C44430;
+    --washi:#F4EBD8;
+    --washi-2:#FBF5E8;
+    --ink:#241B14;
+    --ink-soft:#6A5C4D;
+    --line:#E2D5BC;
+    --gold:#BE923B;
+    --kin:#CBA85C;
+    --kin-2:#E6CE92;
+
+    --serif:'Zen Antique', serif;
+    --brush:'Yuji Syuku', serif;
+    --gothic:'Zen Kaku Gothic New', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:var(--gothic); background:var(--washi); color:var(--ink);
+    line-height:1.85; padding-bottom:108px; -webkit-font-smoothing:antialiased;
+  }
+
+  /* ====== 金魚（細身の金シルエット・端から端まで横断 + 追従波紋） ====== */
+  .koi{position:absolute; color:var(--kin); pointer-events:none; will-change:left;}
+  .koi svg{display:block; width:100%; height:auto; filter:drop-shadow(0 3px 6px rgba(0,0,0,.22));}
+  
+  .koi__face{
+    display:block;
+    animation: strokeL 4.3s ease-in-out infinite;
+  }
+  .koi__face--r{
+    animation: strokeR 4.7s ease-in-out infinite;
+  }
+  .koi__bob{display:block; animation:bob 5s ease-in-out infinite;}
+  
+  @keyframes bob{ 0%,100%{transform:translateY(0) rotate(-1.5deg);} 50%{transform:translateY(-6px) rotate(1.6deg);} }
+
+  @keyframes strokeL {
+    0%, 100% { transform: translateX(0); }
+    15%      { transform: translateX(-16px); }
+    60%      { transform: translateX(6px); }  
+  }
+  @keyframes strokeR {
+    0%, 100% { transform: scaleX(-1) translateX(0); }
+    15%      { transform: scaleX(-1) translateX(-16px); }
+    60%      { transform: scaleX(-1) translateX(6px); }
+  }
+
+  .koi--swimR{animation:acrossR calc(var(--dur,22s) * 1.5) linear infinite var(--delay,0s);}
+  .koi--swimL{animation:acrossL calc(var(--dur,22s) * 1.5) linear infinite var(--delay,0s);}
+  @keyframes acrossR{ from{left:-18%;} to{left:112%;} }
+  @keyframes acrossL{ from{left:112%;} to{left:-18%;} }
+
+  /* 金魚に追従する波紋 */
+  .koi__wake{
+    position:absolute; top:50%; width:100%;
+    pointer-events:none; z-index:-1;
+  }
+  .koi--swimL .koi__wake{
+    left: 50%; transform:translateY(-50%);
+  }
+  .koi--swimR .koi__wake{
+    right: 50%; transform:translateY(-50%) scaleX(-1);
+  }
+
+  .koi__wake svg{ 
+    display:block; 
+    width:100%; 
+    height:auto; 
+    filter:none; 
+    overflow:visible; /* この1行を追加：SVGの枠外にはみ出た波紋の描画を許可する */
+  }
+  .koi__wake .r{ 
+    transform-box:fill-box; transform-origin:center; opacity:0; 
+    animation:wake 4.2s ease-out infinite; 
+  }
+  .koi__wake .r2{ animation-delay:1.4s; }
+  .koi__wake .r3{ animation-delay:2.8s; }
+  @keyframes wake{ 
+    0%   { opacity:0; transform:scale(.3) translateX(0); } 
+    18%  { opacity:.35; } 
+    100% { opacity:0; transform:scale(2.8) translateX(30px); } 
+  }
+
+  /* ============ ヒーロー ============ */
+  .hero{
+    position:relative; overflow:hidden; text-align:center; color:#FCEEDA;
+    padding:5.5rem 1.25rem 6.5rem;
+    background:
+      radial-gradient(120% 70% at 50% 118%, rgba(224,116,58,.45) 0%, rgba(224,116,58,0) 55%),
+      linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 52%, var(--dusk) 100%);
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 18%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1.2px 1.2px at 78% 12%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1.5px 1.5px at 33% 28%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.2px 1.2px at 62% 22%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1.3px 1.3px at 88% 30%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.2px 1.2px at 50% 8%, rgba(255,255,255,.6), transparent);
+  }
+  .hero .koi{z-index:1;}
+
+  .lanterns{ position:absolute; top:0; left:0; right:0; height:120px;
+    display:flex; justify-content:space-around; align-items:flex-start; padding:0 4%;
+    border-top:2px solid rgba(252,238,218,.25); pointer-events:none; z-index:2; }
+  .lantern{ position:relative; width:30px; height:40px; margin-top:var(--drop,16px); border-radius:50%/46%;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.10) 0 1px, transparent 1px 6px),
+      radial-gradient(circle at 50% 38%, #FFD27A 0%, var(--lantern) 45%, var(--lantern-deep) 100%);
+    box-shadow:0 0 18px rgba(244,165,61,.65), inset 0 -4px 8px rgba(0,0,0,.15);
+    transform-origin:top center; animation:sway 5.5s ease-in-out infinite; }
+  .lantern::before{ content:""; position:absolute; top:-4px; left:50%; transform:translateX(-50%);
+    width:13px; height:5px; background:#2A2233; border-radius:2px; }
+  .lantern::after{ content:""; position:absolute; bottom:-9px; left:50%; transform:translateX(-50%);
+    width:3px; height:9px; background:var(--vermilion); border-radius:2px; }
+  .lantern:nth-child(2n){--drop:30px; animation-duration:6.5s;}
+  .lantern:nth-child(3n){--drop:8px; animation-duration:5s;}
+  .lantern:nth-child(4n){--drop:24px;}
+  @keyframes sway{ 0%,100%{transform:rotate(-3.5deg);} 50%{transform:rotate(3.5deg);} }
+
+  /* 風鈴 */
+  .furin{ position:absolute; top:6px; right:8%; width:50px; color:var(--kin); z-index:2;
+    transform-origin:top center; animation:furin 4.5s ease-in-out infinite; pointer-events:none; }
+  .furin svg{display:block; width:100%; height:auto;}
+  @keyframes furin{ 0%,100%{transform:rotate(-4deg);} 50%{transform:rotate(4deg);} }
+
+  /* 蛍 */
+  .firefly{ position:absolute; width:4px; height:4px; border-radius:50%;
+    background:#FFE9A8; box-shadow:0 0 10px 3px rgba(255,221,130,.8);
+    animation:drift 9s ease-in-out infinite; pointer-events:none; opacity:0; z-index:2; }
+  @keyframes drift{ 0%{opacity:0; transform:translate(0,0);} 20%{opacity:.9;}
+    50%{opacity:.5; transform:translate(22px,-26px);} 80%{opacity:.85;}
+    100%{opacity:0; transform:translate(-12px,-48px);} }
+
+  .hero__inner{position:relative; z-index:3;}
+  .hero__eyebrow{ font-family:var(--serif); letter-spacing:.34em; font-size:.82rem;
+    color:#F4C98A; margin:0 0 1.4rem; padding-left:.34em; }
+  .hero__title{ font-family:var(--brush); font-size:clamp(4rem,17vw,7.5rem); line-height:1;
+    margin:0; letter-spacing:.08em; text-shadow:0 0 30px rgba(244,165,61,.4); }
+  .hero__year{ font-family:var(--serif); font-size:clamp(1.1rem,4vw,1.5rem); letter-spacing:.7em;
+    margin:1.1rem 0 1.8rem; padding-left:.7em; color:#FCEEDA; }
+  .hero__year::before,.hero__year::after{ content:"—"; color:var(--lantern); margin:0 .5em; opacity:.7; }
+  .hero__tagline{ font-family:var(--serif); font-size:clamp(1.05rem,3.4vw,1.35rem); margin:0 0 .4rem; color:#FFE6C4; }
+  .hero__venue{ font-size:.95rem; color:#D8C7B0; margin:0; letter-spacing:.04em; }
+
+  /* ============ のれん（ALL FREE） ============ */
+  .noren{ background:var(--vermilion); color:#FCEEDA; text-align:center; padding:2.8rem 1.25rem; position:relative; }
+  .noren::after{ content:""; position:absolute; left:0; right:0; bottom:-14px; height:14px;
+    background:repeating-linear-gradient(90deg, var(--vermilion) 0 14px, transparent 14px 28px);
+    -webkit-mask:repeating-linear-gradient(90deg, #000 0 14px, transparent 14px 28px); }
+  .noren__label{ font-family:var(--serif); letter-spacing:.5em; font-size:.78rem; opacity:.85; margin:0 0 .6rem; padding-left:.5em; }
+  .noren__main{ font-family:var(--brush); font-size:clamp(2.2rem,9vw,3.4rem); margin:0; line-height:1.2; letter-spacing:.1em; }
+  .noren__sub{ font-size:1rem; margin:.9rem auto 0; max-width:640px; color:#FBE2CF; }
+
+  /* ============ セクション共通 ============ */
+  .section{max-width:1020px; margin:0 auto; padding:4.5rem 1.25rem;}
+  .section__head{text-align:center; margin-bottom:3rem;}
+  .section__eyebrow{ font-family:var(--serif); letter-spacing:.4em; font-size:.74rem; color:var(--gold);
+    margin:0 0 .7rem; padding-left:.4em; text-transform:uppercase; }
+  .section__title{ font-family:var(--serif); font-size:clamp(1.7rem,5vw,2.3rem); color:var(--ink); margin:0; letter-spacing:.06em; }
+
+  /* ============ アコーディオン ============ */
+  .acc{max-width:1020px; margin:0 auto;}
+  .acc__head{ width:100%; display:flex; align-items:center; gap:1rem;
+    background:var(--washi-2); border:1px solid var(--line); border-radius:14px;
+    padding:1.3rem 1.6rem; cursor:pointer; text-align:left; font:inherit; color:inherit;
+    transition:background .2s ease, box-shadow .2s ease; }
+  .acc__head:hover{background:#fff; box-shadow:0 6px 18px rgba(36,27,20,.06);}
+  .acc__head:focus-visible{outline:2px solid var(--lantern-deep); outline-offset:3px;}
+  .acc__head-text{flex:1 1 auto; display:flex; flex-direction:column; gap:.2rem; min-width:0;}
+  .acc__head .section__eyebrow{margin:0; padding:0;}
+  .acc__head .section__title{font-size:clamp(1.4rem,4.4vw,1.9rem);}
+  .acc__meta{flex:none; font-family:var(--serif); font-size:.78rem; color:var(--gold); letter-spacing:.08em; white-space:nowrap;}
+  .acc__icon{flex:none; width:24px; height:24px; position:relative;}
+  .acc__icon::before,.acc__icon::after{ content:""; position:absolute; background:var(--lantern-deep); border-radius:2px; }
+  .acc__icon::before{ left:50%; top:3px; bottom:3px; width:2.5px; transform:translateX(-50%) scaleY(1); transition:transform .3s ease; }
+  .acc__icon::after{ top:50%; left:3px; right:3px; height:2.5px; transform:translateY(-50%); }
+  .acc.is-open .acc__icon::before{ transform:translateX(-50%) scaleY(0); }
+  .acc__panel{ overflow:hidden; transition:max-height .4s ease; }
+  html.js .acc__panel{ max-height:0; }
+  .acc__inner{ padding-top:2.4rem; }
+
+  /* ============ タイムライン ============ */
+  .timeline{ list-style:none; margin:0 auto; padding:0; max-width:560px; position:relative; }
+  .timeline::before{ content:""; position:absolute; top:6px; bottom:6px; left:74px; width:2px;
+    background:linear-gradient(var(--lantern), var(--lantern-deep)); }
+  .tl-item{position:relative; display:grid; grid-template-columns:62px 1fr; gap:1.4rem; padding-bottom:2.2rem;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-time{ font-family:var(--serif); font-size:1.15rem; color:var(--vermilion); text-align:right;
+    padding-top:.1rem; letter-spacing:.02em; white-space:nowrap; }
+  .tl-node{position:relative;}
+  .tl-node::before{ content:""; position:absolute; left:-10px; top:6px; width:14px; height:14px; border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, #FFD27A, var(--lantern));
+    box-shadow:0 0 0 4px var(--washi-2), 0 0 12px rgba(244,165,61,.7); }
+  .tl-card{ background:var(--washi); border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin-left:1rem; }
+  .tl-card h3{font-family:var(--serif); margin:0; font-size:1.12rem; letter-spacing:.03em;}
+  .tl-card p{margin:.4rem 0 0; font-size:.9rem; color:var(--ink-soft); line-height:1.7;}
+  .tl-note{font-size:.8rem; color:var(--vermilion);}
+
+  /* ============ 屋台グリッド ============ */
+  .stalls{background:var(--washi-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:1.6rem; }
+  .stall{ background:var(--washi); border:1px solid var(--line); border-radius:12px; overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease; }
+  .stall:hover{transform:translateY(-4px); box-shadow:0 12px 28px rgba(36,27,20,.10);}
+  .stall__photo{ position:relative; height:160px; display:flex; align-items:center; justify-content:center; color:#FCEEDA; }
+  .stall:nth-child(4n+1) .stall__photo{background:linear-gradient(135deg,var(--lantern-deep),var(--lantern));}
+  .stall:nth-child(4n+2) .stall__photo{background:linear-gradient(135deg,#9F3322,var(--vermilion));}
+  .stall:nth-child(4n+3) .stall__photo{background:linear-gradient(135deg,var(--night-2),var(--dusk));}
+  .stall:nth-child(4n+4) .stall__photo{background:linear-gradient(135deg,#A4791F,var(--gold));}
+  .stall__photo::after{ content:"PHOTO"; position:absolute; top:.6rem; right:.7rem; font-family:var(--serif);
+    font-size:.6rem; letter-spacing:.28em; opacity:.6; padding-left:.28em; }
+  .stall__cat{font-family:var(--brush); font-size:2rem; letter-spacing:.12em; text-shadow:0 2px 6px rgba(0,0,0,.2);}
+  .stall__body{padding:1.3rem 1.4rem 1.5rem;}
+  .stall__name{ display:flex; align-items:baseline; justify-content:space-between; gap:.6rem; margin:0 0 .7rem;
+    font-family:var(--serif); font-size:1.18rem; color:var(--ink); letter-spacing:.02em; }
+  .tag{ flex:none; font-size:.7rem; letter-spacing:.06em; color:var(--vermilion); border:1px solid var(--vermilion);
+    border-radius:3px; padding:.18rem .5rem; line-height:1; font-family:var(--gothic); }
+  .stall__desc{margin:0; font-size:.9rem; color:var(--ink-soft); line-height:1.8;}
+  .stall__desc b{color:var(--vermilion);}
+
+  /* ============ 縁日エリア（水紋パネル） ============ */
+  .ennichi{text-align:center;}
+  .water{
+    position:relative; overflow:hidden; max-width:760px; margin:0 auto; min-height:340px;
+    color:var(--kin);
+    border-radius:20px; border:1px solid rgba(203,168,92,.4);
+    background:linear-gradient(165deg, var(--royal-1) 0%, #20216A 50%, var(--royal-2) 100%);
+    box-shadow:inset 0 0 80px rgba(0,0,0,.3), 0 14px 40px rgba(25,26,84,.3);
+    display:flex; align-items:flex-end;
+  }
+  .water .koi{z-index:2;}
+  .water__caption{ position:relative; z-index:3; width:100%; padding:2.6rem 1.6rem 2rem;
+    background:linear-gradient(180deg, transparent 0%, rgba(15,16,55,.65) 75%); color:#EDE6D2; }
+  .water__caption .lead{font-family:var(--serif); font-size:1.2rem; letter-spacing:.06em; margin:0 0 .5rem; color:var(--kin-2);}
+  .water__caption p{margin:0; font-size:.95rem; color:#D8D2E6;}
+  .water__caption b{color:#fff; font-style:normal;}
+
+  /* ============ フッター ============ */
+  .foot{ text-align:center; padding:2.5rem 1.25rem 3rem; color:var(--ink-soft); font-size:.85rem; border-top:1px solid var(--line); }
+  .foot span{font-family:var(--brush); font-size:1.1rem; color:var(--vermilion); letter-spacing:.1em;}
+
+  /* ============ 固定CTA ============ */
+  .cta{ position:fixed; left:0; right:0; bottom:0; z-index:1000;
+    background:rgba(244,235,216,.92); backdrop-filter:blur(8px); border-top:1px solid var(--line);
+    padding:.85rem 1rem 1rem; text-align:center; box-shadow:0 -6px 24px rgba(36,27,20,.10); }
+  .cta__hint{font-size:.74rem; color:var(--vermilion); margin:0 0 .5rem; letter-spacing:.04em;}
+  .cta__btn{ display:inline-block; font-family:var(--serif); font-size:1.1rem; letter-spacing:.06em; color:var(--ink);
+    background:linear-gradient(135deg,#FFD27A,var(--lantern)); text-decoration:none; padding:.85rem 2.6rem;
+    border-radius:999px; box-shadow:0 6px 18px rgba(244,165,61,.45); animation:glow 2.8s ease-in-out infinite; }
+  .cta__btn:hover{filter:brightness(1.04); box-shadow:0 8px 22px rgba(244,165,61,.6);}
+  @keyframes glow{ 0%,100%{box-shadow:0 6px 16px rgba(244,165,61,.35);} 50%{box-shadow:0 6px 26px rgba(244,165,61,.7);} }
+
+  /* ============ スクロール出現 ============ */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  @media (max-width:600px){
+    .section{padding:3.4rem 1.1rem;}
+    .acc__head{padding:1.1rem 1.2rem;}
+    .acc__meta{display:none;}
+    .tl-time{font-size:1rem;}
+    .cta__btn{width:88%; padding:.85rem 1rem;}
+    .furin{width:40px; right:5%;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .lantern,.firefly,.cta__btn,.furin,.koi,.koi__bob,.koi__wake .r{animation:none !important;}
+    .koi__wake{display:none;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .acc__panel{transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="lanterns" aria-hidden="true">
+    <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+    <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+    <span class="lantern"></span><span class="lantern"></span><span class="lantern"></span>
+  </div>
+
+  <div class="furin" aria-hidden="true">
+    <svg viewBox="0 0 60 116" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <rect x="29" y="0" width="2" height="22" rx="1"/>
+      <path d="M30 22 C16 22 10 34 10 46 C10 54 14 60 30 60 C46 60 50 54 50 46 C50 34 44 22 30 22 Z"/>
+      <path d="M10 47 C18 53 42 53 50 47 L50 51 C42 57 18 57 10 51 Z"/>
+      <circle cx="30" cy="66" r="5"/>
+      <rect x="27.5" y="70" width="5" height="20" rx="2"/>
+      <path d="M24 90 h12 v18 c-2 4 -10 4 -12 0 Z" opacity=".92"/>
+    </svg>
+  </div>
+
+  <div class="koi koi--swimR" style="bottom:13%; left:10%; width:100px; opacity:.7; --dur:26s; --delay:-4s;" aria-hidden="true">
+    <div class="koi__face koi__face--r"><div class="koi__bob">
+      <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg">
+        <g fill="currentColor">
+          <path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/>
+          <path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/>
+          <path d="M36 52 C38 67 53 67 51 52 Z"/>
+          <path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/>
+          <path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/>
+        </g>
+        <circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/>
+      </svg>
+    </div></div>
+    <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2">
+      <ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/>
+    </svg></div>
+  </div>
+
+  <div class="koi koi--swimL" style="bottom:40%; left:70%; width:62px; opacity:.45; --dur:32s; --delay:-16s;" aria-hidden="true">
+    <div class="koi__face"><div class="koi__bob">
+      <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg">
+        <g fill="currentColor">
+          <path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/>
+          <path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/>
+          <path d="M36 52 C38 67 53 67 51 52 Z"/>
+          <path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/>
+          <path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/>
+        </g>
+        <circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/>
+      </svg>
+    </div></div>
+    <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2">
+      <ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/>
+    </svg></div>
+  </div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow">アルファ・ラバル湘南センター</p>
+    <h1 class="hero__title">納涼祭</h1>
+    <p class="hero__year">2026</p>
+    <p class="hero__tagline">夕涼みに、ひと夏の縁日を。</p>
+    <p class="hero__venue">食べて、遊んで、家族みんなで最高の一日を。</p>
+  </div>
+</header>
+
+<section class="noren">
+  <p class="noren__label">ALL FREE</p>
+  <p class="noren__main">全品、無料。</p>
+  <p class="noren__sub">人気のキッチンカーが大集合。ビール・アルコールから、お子様向けのドリンクまで。<br>すべて無料でお楽しみいただけます。</p>
+</section>
+
+<section class="section" id="schedule">
+  <div class="acc reveal" data-acc data-open>
+    <button class="acc__head" type="button" aria-expanded="true" aria-controls="panel-schedule" id="head-schedule">
+      <span class="acc__head-text">
+        <span class="section__eyebrow">Schedule</span>
+        <span class="section__title">当日のながれ</span>
+      </span>
+      <span class="acc__meta">全6プログラム</span>
+      <span class="acc__icon" aria-hidden="true"></span>
+    </button>
+    <div class="acc__panel" id="panel-schedule" role="region" aria-labelledby="head-schedule">
+      <div class="acc__inner">
+        <ul class="timeline">
+          <li class="tl-item">
+            <div class="tl-time">15:50</div>
+            <div class="tl-node"><div class="tl-card"><h3>工場見学</h3><p>普段は見られない裏側を大公開。最新設備を間近で。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">16:20</div>
+            <div class="tl-node"><div class="tl-card"><h3>オフィスツアー</h3><p>アルファ・ラバルで働く環境を、ご家族にもご覧いただけます。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">16:30</div>
+            <div class="tl-node"><div class="tl-card"><h3>開会セレモニー</h3><p>納涼祭、いよいよスタート。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">17:30</div>
+            <div class="tl-node"><div class="tl-card"><h3>チーム対抗戦</h3><p>部署や家族の垣根を超えて盛り上がるゲーム大会。<br><span class="tl-note">※要エントリー </span></p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">18:40</div>
+            <div class="tl-node"><div class="tl-card"><h3>大抽選会</h3><p>豪華景品が当たるチャンス。最後までお見逃しなく。</p></div></div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-time">19:00</div>
+            <div class="tl-node"><div class="tl-card"><h3>閉会セレモニー</h3><p>また来年。お気をつけてお帰りください。</p></div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stalls">
+  <div class="section">
+    <div class="acc reveal" data-acc data-open>
+      <button class="acc__head" type="button" aria-expanded="true" aria-controls="panel-stalls" id="head-stalls">
+        <span class="acc__head-text">
+          <span class="section__eyebrow">Food &amp; Drink — All Free</span>
+          <span class="section__title">出店のご案内</span>
+        </span>
+        <span class="acc__meta">全9店舗・無料</span>
+        <span class="acc__icon" aria-hidden="true"></span>
+      </button>
+      <div class="acc__panel" id="panel-stalls" role="region" aria-labelledby="head-stalls">
+        <div class="acc__inner">
+          <div class="grid">
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">むすび</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">MUSUBI <span class="tag">おにぎり</span></h3>
+                <p class="stall__desc">ふっくら炊き上げたお米に、定番からこだわりの具材まで。ほっとする手作りおむすび。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">ピザ</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">pizza monte costa <span class="tag">ピザ</span></h3>
+                <p class="stall__desc">昨年大好評。薪窯で焼き上げる本格ナポリピッツァを、焼きたて熱々で。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">カレー</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">Hi,spice <span class="tag">カレー</span></h3>
+                <p class="stall__desc">2026年初参戦。味噌とスパイスを掛け合わせた、旨みと香り広がるオリジナルカレー。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">焼鳥</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">龍鳳（りゅうほう） <span class="tag">やきとり</span></h3>
+                <p class="stall__desc">創業以来受け継がれる秘伝のたれ。一本一本ていねいに焼き上げる本格炭火焼き鳥。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">アイス</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">Plenty's <span class="tag">アイス</span></h3>
+                <p class="stall__desc">神奈川・茅ヶ崎発のアイス専門店。新鮮なミルクの濃厚なアイス。<b>ワッフルは早い者勝ち。</b></p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">クレープ</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">AL FRENTE <span class="tag">クレープ・チュロス</span></h3>
+                <p class="stall__desc">サクッと香ばしいチュロスやチーズチュロドッグ、クレープなど人気メニューが勢ぞろい。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">チキン</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">ROKET CHICKEN <span class="tag">チキンBOX</span></h3>
+                <p class="stall__desc">揚げたてアツアツ。軽い食感とジューシーな旨みが自慢のオリジナルフライドチキン。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">サンド</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">THE NYC BOX <span class="tag">キューバサンド</span></h3>
+                <p class="stall__desc">自家製ローストポークとチーズが織りなす、本格ニューヨークスタイルのキューバサンド。</p>
+              </div>
+            </article>
+            <article class="stall">
+              <div class="stall__photo"><span class="stall__cat">ケバブ</span></div>
+              <div class="stall__body">
+                <h3 class="stall__name">YOKO FOOD <span class="tag">ケバブ</span></h3>
+                <p class="stall__desc">香ばしく焼いたジューシーなお肉と新鮮野菜をたっぷり。特製ソースのボリューム満点ケバブ。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ennichi" id="ennichi">
+  <div class="section__head reveal">
+    <p class="section__eyebrow">For Kids</p>
+    <h2 class="section__title">縁日エリア</h2>
+  </div>
+
+  <div class="water reveal">
+    <div class="koi koi--swimR" style="top:22%; left:8%; width:108px; --dur:17s; --delay:-2s;" aria-hidden="true">
+      <div class="koi__face koi__face--r"><div class="koi__bob">
+        <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg">
+          <g fill="currentColor">
+            <path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/>
+            <path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/>
+            <path d="M36 52 C38 67 53 67 51 52 Z"/>
+            <path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/>
+            <path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/>
+          </g>
+          <circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/>
+        </svg>
+      </div></div>
+      <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2">
+        <ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/>
+      </svg></div>
+    </div>
+
+    <div class="koi koi--swimL" style="top:46%; left:70%; width:76px; opacity:.85; --dur:21s; --delay:-9s;" aria-hidden="true">
+      <div class="koi__face"><div class="koi__bob">
+        <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg">
+          <g fill="currentColor">
+            <path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/>
+            <path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/>
+            <path d="M36 52 C38 67 53 67 51 52 Z"/>
+            <path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/>
+            <path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/>
+          </g>
+          <circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/>
+        </svg>
+      </div></div>
+      <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2">
+        <ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/>
+      </svg></div>
+    </div>
+
+    <div class="koi koi--swimR" style="top:62%; left:40%; width:56px; opacity:.6; --dur:25s; --delay:-15s;" aria-hidden="true">
+      <div class="koi__face koi__face--r"><div class="koi__bob">
+        <svg viewBox="0 0 170 96" xmlns="http://www.w3.org/2000/svg">
+          <g fill="currentColor">
+            <path d="M50 31 C62 12 88 14 96 38 C82 30 64 28 50 31 Z"/>
+            <path d="M56 64 C58 81 77 81 81 62 C72 68 64 68 56 64 Z"/>
+            <path d="M36 52 C38 67 53 67 51 52 Z"/>
+            <path d="M14 48 C16 37 28 30 46 30 C66 30 86 36 98 47 C90 48 90 48 98 49 C86 60 66 66 46 66 C28 66 12 59 14 48 Z"/>
+            <path d="M92 48 C116 26 146 16 166 22 C150 34 134 42 158 48 C134 54 150 62 166 74 C146 80 116 70 92 48 Z"/>
+          </g>
+          <circle cx="26" cy="44" r="2.4" fill="rgba(15,16,55,.6)"/>
+        </svg>
+      </div></div>
+      <div class="koi__wake"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2">
+        <ellipse class="r r1" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r2" cx="60" cy="30" rx="20" ry="7"/><ellipse class="r r3" cx="60" cy="30" rx="20" ry="7"/>
+      </svg></div>
+    </div>
+
+    <div class="water__caption">
+      <p class="lead">縁日コーナー</p>
+      <p><b>ヨーヨー釣り・駄菓子屋</b>など、昔懐かしい縁日がずらり。お子様連れでも安心してお楽しみいただけます。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>納涼祭 2026</span><br>
+  アルファ・ラバル湘南センター
+</footer>
+
+<div class="cta">
+  <p class="cta__hint">＼ 食材・景品の準備のため、お早めにご登録ください ／</p>
+  <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=R19d7d1Sr0iQyve9g2JOuaFgDIAhRLJGi-9xzWBQLT1UQVQzUEQ2QzE4T0wyQjkzMDlVNjg0MExBVS4u" class="cta__btn">参加・同伴者を登録 <span class="cta__hint" style="margin: 0; display: block;">*要:社員アカウント ログイン</span></a>
+</div>
+
+<script>
+  const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 蛍
+  (function(){
+    if (REDUCE) return;
+    const hero = document.querySelector('.hero');
+    for (let i=0;i<6;i++){
+      const f = document.createElement('span');
+      f.className = 'firefly';
+      f.style.left = (10 + Math.random()*80) + '%';
+      f.style.top  = (30 + Math.random()*55) + '%';
+      f.style.animationDelay = (Math.random()*9) + 's';
+      hero.appendChild(f);
+    }
+  })();
+
+  // アコーディオン
+  (function(){
+    document.querySelectorAll('[data-acc]').forEach(function(acc){
+      const head  = acc.querySelector('.acc__head');
+      const panel = acc.querySelector('.acc__panel');
+      function apply(open, animate){
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        acc.classList.toggle('is-open', open);
+        if (!animate || REDUCE){ panel.style.maxHeight = open ? 'none' : '0px'; return; }
+        if (open){
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          const done = function(e){ if(e.propertyName==='max-height'){ panel.style.maxHeight='none'; panel.removeEventListener('transitionend', done);} };
+          panel.addEventListener('transitionend', done);
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ panel.style.maxHeight='0px'; }); });
+        }
+      }
+      apply(acc.hasAttribute('data-open'), false);
+      head.addEventListener('click', function(){ apply(head.getAttribute('aria-expanded') !== 'true', true); });
+    });
+  })();
+
+  // スクロール出現
+  (function(){
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || REDUCE){ els.forEach(function(e){e.classList.add('in');}); return; }
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    }, {threshold:.12});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+
+</body>
+</html>
