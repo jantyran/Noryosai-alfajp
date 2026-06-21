@@ -257,6 +257,59 @@
   .water__caption p{margin:0; font-size:.95rem; color:#D8D2E6;}
   .water__caption b{color:#fff; font-style:normal;}
 
+  /* ============ アクセス情報 ============ */
+  .access-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+  @media (max-width:680px){ .access-grid{ grid-template-columns:1fr; } }
+
+  .access-card{
+    background:var(--washi); border:1px solid var(--line); border-radius:14px;
+    padding:1.8rem 1.8rem 2rem; display:flex; flex-direction:column; gap:1.2rem;
+  }
+  .access-card__head{ display:flex; align-items:center; gap:.9rem; }
+  .access-card__icon{
+    flex:none; width:48px; height:48px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+    background:linear-gradient(135deg,var(--night-2),var(--royal-1));
+    color:var(--kin);
+  }
+  .access-card__title{ font-family:var(--serif); font-size:1.2rem; letter-spacing:.04em; margin:0; color:var(--ink); }
+  .access-card__sub{ font-size:.8rem; color:var(--ink-soft); margin:.15rem 0 0; }
+
+  .shuttle-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.9rem; }
+  .shuttle-item{
+    border-left:3px solid var(--lantern); padding-left:1rem; display:flex; flex-direction:column; gap:.2rem;
+  }
+  .shuttle-item__route{ font-family:var(--serif); font-size:1rem; color:var(--ink); letter-spacing:.02em; }
+  .shuttle-item__times{ font-size:.85rem; color:var(--ink-soft); }
+  .shuttle-item__times b{ color:var(--vermilion); font-weight:700; }
+  .shuttle-note{
+    font-size:.8rem; color:var(--ink-soft); background:rgba(203,168,92,.12);
+    border:1px solid rgba(203,168,92,.3); border-radius:8px; padding:.7rem 1rem; line-height:1.7;
+  }
+  .shuttle-note b{ color:var(--gold); }
+
+  .parking-info{ display:flex; flex-direction:column; gap:1rem; }
+  .parking-block{ border-left:3px solid var(--vermilion); padding-left:1rem; }
+  .parking-block__name{ font-family:var(--serif); font-size:1rem; color:var(--ink); margin:0 0 .25rem; }
+  .parking-block__detail{ font-size:.85rem; color:var(--ink-soft); margin:0; line-height:1.7; }
+  .parking-block__detail b{ color:var(--ink); }
+  .parking-note{
+    font-size:.8rem; color:var(--ink-soft); background:rgba(196,68,48,.06);
+    border:1px solid rgba(196,68,48,.2); border-radius:8px; padding:.7rem 1rem; line-height:1.7;
+  }
+  .parking-note b{ color:var(--vermilion); }
+
+  .parking-address{ border-left:3px solid var(--gold); padding-left:1rem; }
+  .parking-address__label{ font-size:.8rem; color:var(--gold); font-family:var(--serif); margin:0 0 .3rem; letter-spacing:.04em; }
+  .parking-address__text{ font-size:.875rem; color:var(--ink-soft); margin:0; line-height:1.8; }
+
+  .parking-map{ border-radius:10px; overflow:hidden; border:1px solid var(--line); }
+  .parking-map iframe{ display:block; width:100%; height:220px; border:none; }
+  .parking-map__placeholder{
+    height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:.6rem; background:var(--washi); color:var(--ink-soft); font-size:.85rem;
+  }
+
   /* ============ フッター ============ */
   .foot{ text-align:center; padding:2.5rem 1.25rem 3rem; color:var(--ink-soft); font-size:.85rem; border-top:1px solid var(--line); }
   .foot span{font-family:var(--brush); font-size:1.1rem; color:var(--vermilion); letter-spacing:.1em;}
@@ -485,6 +538,88 @@
               </div>
             </article>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="acc reveal" data-acc data-open>
+    <button class="acc__head" type="button" aria-expanded="true" aria-controls="panel-access" id="head-access">
+      <span class="acc__head-text">
+        <span class="section__eyebrow">Access</span>
+        <span class="section__title">会場へのアクセス</span>
+      </span>
+      <span class="acc__meta">シャトル・駐車場</span>
+      <span class="acc__icon" aria-hidden="true"></span>
+    </button>
+    <div class="acc__panel" id="panel-access" role="region" aria-labelledby="head-access">
+      <div class="acc__inner">
+        <div class="access-grid">
+
+          <!-- シャトルバス -->
+          <div class="access-card">
+            <div class="access-card__head">
+              <div class="access-card__icon">🚌</div>
+              <div>
+                <h3 class="access-card__title">シャトルバス</h3>
+                <p class="access-card__sub">各駅から無料送迎</p>
+              </div>
+            </div>
+            <ul class="shuttle-list">
+              <li class="shuttle-item">
+                <span class="shuttle-item__route">辻堂駅（北口）→ 会場</span>
+                <span class="shuttle-item__times">往路：<b>15:30 / 16:00 / 16:30</b></span>
+                <span class="shuttle-item__times">復路：<b>18:30 / 19:00 / 19:30</b></span>
+              </li>
+              <li class="shuttle-item">
+                <span class="shuttle-item__route">茅ヶ崎駅（北口）→ 会場</span>
+                <span class="shuttle-item__times">往路：<b>15:20 / 15:50 / 16:20</b></span>
+                <span class="shuttle-item__times">復路：<b>18:20 / 18:50 / 19:20</b></span>
+              </li>
+              <li class="shuttle-item">
+                <span class="shuttle-item__route">藤沢駅（北口）→ 会場</span>
+                <span class="shuttle-item__times">往路：<b>15:10 / 15:40 / 16:10</b></span>
+                <span class="shuttle-item__times">復路：<b>18:10 / 18:40 / 19:10</b></span>
+              </li>
+            </ul>
+            <p class="shuttle-note"><b>乗り場・注意事項：</b>各駅北口のバス停にお集まりください。定員になり次第出発します。満席の場合は次の便をご利用ください。</p>
+          </div>
+
+          <!-- 駐車場 -->
+          <div class="access-card">
+            <div class="access-card__head">
+              <div class="access-card__icon">🚗</div>
+              <div>
+                <h3 class="access-card__title">お車でお越しの方</h3>
+                <p class="access-card__sub">会場内・近隣駐車場</p>
+              </div>
+            </div>
+            <div class="parking-info">
+              <div class="parking-block">
+                <h4 class="parking-block__name">会場内駐車場（第1・第2）</h4>
+                <p class="parking-block__detail"><b>台数：</b>計 120台（先着順）<br><b>料金：</b>無料<br><b>利用時間：</b>15:00 〜 20:00</p>
+              </div>
+              <div class="parking-block">
+                <h4 class="parking-block__name">近隣コインパーキング</h4>
+                <p class="parking-block__detail"><b>辻堂パーク</b>（徒歩7分）／<b>湘南テラスパーク</b>（徒歩10分）など周辺にも複数あり。<br>会場内が満車の場合はご利用ください。</p>
+              </div>
+              <div class="parking-address">
+                <p class="parking-address__label">📍 会場住所</p>
+                <p class="parking-address__text">〒000-0000<br>神奈川県 ○○市 ○○町 0-0-0<br>アルファ・ラバル湘南センター</p>
+              </div>
+              <div class="parking-map">
+                <!-- ここにGoogle Mapsの埋め込みiframeを貼り付けてください -->
+                <div class="parking-map__placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>地図をここに追加</span>
+                </div>
+              </div>
+            </div>
+            <p class="parking-note"><b>混雑のご案内：</b>開始1時間前（15:30頃）は特に混雑が予想されます。お時間に余裕をもってお越しいただくか、シャトルバスのご利用もご検討ください。</p>
+          </div>
+
         </div>
       </div>
     </div>
